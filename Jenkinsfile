@@ -23,6 +23,7 @@ pipeline {
         	name: 'WhichBranch',
         	choices: ["$BranchName"],
         	description: '构建分支选择，默认release')
+	}
     stages {
         stage('Build') { 
             steps {
