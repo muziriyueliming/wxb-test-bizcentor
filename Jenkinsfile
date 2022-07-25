@@ -1,13 +1,15 @@
 pipeline {
     agent any 
     parameters {
+        gitParameter name: 'BRANCH_TAG', 
+                     type: 'PT_BRANCH_TAG',
+                     branchFilter: 'origin/(.*)',
+                     defaultValue: 'master',
+                     selectedValue: 'DEFAULT',
+                     sortMode: 'ASCENDING_SMART',
+		     description: '选择分支.'
         string(name: 'BranchName', defaultValue: 'master', description: null)
-
-    	choice(
-        	name: 'WhichBranch',
-        	choices: ["$BranchName"],
-        	description: '构建分支选择，默认release')
-	}
+    }
     stages {
         stage('Build') { 
 	    steps {
