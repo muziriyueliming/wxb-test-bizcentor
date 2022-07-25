@@ -1,15 +1,15 @@
 pipeline {
-	agent any
+    agent any
 
-	parameters {
+    parameters {
 		string(name: 'BranchName', defaultValue: 'master', description: null)
-	}
- 
-	stages {
-		stage ('Test Branch Name') {
-			steps {
-				echo "${env.BranchName}"
-			}
-		}
-	}
+    }
+
+    stages {
+        stage ('Test Branch Name') {
+	    steps {
+                echo "${env.BranchName}"
+            }
+        }
+    }
 }
