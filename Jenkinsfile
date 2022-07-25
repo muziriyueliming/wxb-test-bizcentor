@@ -16,9 +16,8 @@
 pipeline {
     agent any 
     parameters {
-	parameters {
-              string(name: 'BranchName', defaultValue: 'master', description: null)
-	}
+        string(name: 'BranchName', defaultValue: 'master', description: null)
+
     	choice(
         	name: 'WhichBranch',
         	choices: ["$BranchName"],
