@@ -1,6 +1,8 @@
 pipeline {
-    agent any 
+    agent any
     parameters {
+ 
+        //gitParameter (name: 'gitBranch', defaultValue:'develop-1.0', description:'分支')
         gitParameter name: 'BRANCH_TAG', 
                      type: 'PT_BRANCH_TAG',
                      branchFilter: 'origin/(.*)',
@@ -8,23 +10,20 @@ pipeline {
                      selectedValue: 'DEFAULT',
                      sortMode: 'ASCENDING_SMART',
 		     description: '选择分支.'
-        string(name: 'BranchName', defaultValue: 'master', description: null)
     }
     stages {
-        stage('Build') { 
-	    steps {
-		echo "${env.BranchName}"
-            }
-        }
-        stage('Test') { 
+        stage('gitlab code') {
             steps {
-                println "Test" 
+                checkout([$class: 'GitSCM', 
+                branches: [[name: '$gitBranch']],
+                doGenerateSubmoduleConfigurations: false, 
+                extensions: [], 
+                submoduleCfg: [],
+                userRemoteConfigs: [[url: 'git@github.com:muziriyueliming/wxb-test-bizcentor.git']]])
             }
+            
         }
-        stage('Deploy') { 
-            steps {
-                println "Deploy" 
-            }
-        }
+        
     }
+    
 }
