@@ -4,14 +4,15 @@ pipeline {
         string(name: 'BranchName', defaultValue: 'master', description: null)
     }
     stages {
+        stage('pull code') {
+	    steps {    
+		echo "pull code over! "
+	    	echo "${env.BranchName}"
+	    }
+	}
         stage('Build') { 
 	    steps {
-		echo "${env.BranchName}"
-            }
-        }
-        stage('Test') { 
-            steps {
-                println "Test" 
+		echo "进行打包操作！"
             }
         }
         stage('Deploy') { 
